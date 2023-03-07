@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Set JSON credentials file location
-JSON_CREDENTIAL=$MYSQL_CRED
+JSON_CREDENTIAL=$POSTGRES_CRED
 
 # Parse JSON file and retrieve credentials
 HOST=$(jq -r '.host' "$JSON_CREDENTIAL")
 PORT=$(jq -r '.port' "$JSON_CREDENTIAL")
 USER=$(jq -r '.user' "$JSON_CREDENTIAL")
-PASSWORD=$(jq -r '.password' "$JSON_CREDENTIAL")
+DATABASE=$(jq -r '.database' "$JSON_CREDENTIAL")
 
-# Connect to MySQL and perform some operations
-echo "Connecting to MySQL..."
-mysql -h "$HOST" -P "$PORT" -u "$USER" -p"$PASSWORD" 
+echo "Connecting to PostgreSQL..."
+psql -h "$HOST" -p "$PORT" -U "$USER" -d "$DATABASE" -W
+
