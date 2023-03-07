@@ -11,4 +11,5 @@ PASSWORD=$(jq -r '.password' "$JSON_CREDENTIAL")
 
 # Connect to MySQL and perform some operations
 echo "Connecting to MySQL..."
+echo "Connecting as '$USER'."
 mysql -h "$HOST" -P "$PORT" -u "$USER" -p"$PASSWORD" 

@@ -10,5 +10,6 @@ USER=$(jq -r '.user' "$JSON_CREDENTIAL")
 DATABASE=$(jq -r '.database' "$JSON_CREDENTIAL")
 
 echo "Connecting to PostgreSQL..."
+echo "Connecting as '$USER'."
 psql -h "$HOST" -p "$PORT" -U "$USER" -d "$DATABASE" -W
 
