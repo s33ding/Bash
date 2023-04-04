@@ -2,23 +2,19 @@
 
 # Define the list of files to move
 file_list=(
-    $ADM \
     $AWS_DEFAULT_FOLDER \
-    $BASH_SCRIPTS \
+    $MY_BASHRC \
+    $MY_VIMRC \
     $BITBUCKET \
     $DOCUMENTS \
     $DOWNLOADS \
-    $FEDORA \
     $GITHUB \
-    $IPYTHON \
-    $MY_BASHRC \
-    $MYSCRIPTS \
-    $MY_VIMRC \
     $PICTURES \
     $TESTE_FOLDER \
     $VIDEOS \
     $VS_CODE_FOLDER \
-    $MUSIC
+    $MUSIC \
+    $BINARY_HOUSE
 )
 
 
@@ -31,13 +27,13 @@ done
 date=$(date +%Y-%m-%d)
 
 # Create a directory with the current date
-rm -r $date -f
-mkdir $date
-chmod +w $date
+
+mkdir $BACKUP_DRIVER/$date
+chmod +w $BACKUP_DRIVER/$date
 
 # Loop through the list of files and move them to the current date directory
 for file in "${file_list[@]}"
 do
     echo "COPYING: $file"
-    cp $file $date -r
+    cp $file $BACKUP_DRIVER/$date/ -r
 done 
