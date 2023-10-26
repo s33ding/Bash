@@ -11,9 +11,15 @@ read key_name
 # Loop through all JSON files in the current directory
 for file in *.json; do
 
-    # Print the filename and the value of the specified key
-    echo "$file"
-    jq ".$key_name" "$file"
+    # Extract the value of the specified key from the file
+    key_value=$(jq ".$key_name" "$file")
+
+    # Check if the key value exists in the file
+    if [ -n "$key_value" ]; then
+        # Print the filename and the value of the specified key
+        echo "$file"
+        echo "$key_value"
+    fi
 
 done
 
