@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'DynamoDB table for storing custom bashrc commands'
+
+Resources:
+  BashrcCommandsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: bashrc
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: kind
+          AttributeType: S
+        - AttributeName: group
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: kind-index
+          KeySchema:
+            - AttributeName: kind
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: group-index
+          KeySchema:
+            - AttributeName: group
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+Outputs:
+  TableName:
+    Description: 'Name of the DynamoDB table'
+    Value: !Ref BashrcCommandsTable
+  TableArn:
+    Description: 'ARN of the DynamoDB table'
+    Value: !GetAtt BashrcCommandsTable.Arn
